@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Resultado from './resultado';
-import JogarNovamente from './jogarNovamente';
 
 export default function Joguinho({ placar, setPlacar }) {
     const [jogador, setJogador] = useState(null);
@@ -42,15 +40,22 @@ export default function Joguinho({ placar, setPlacar }) {
     };
 
     return (
-        <section>
-            <h1>JOKENPO</h1>
-            <div>
-                <button onClick={() => jogar('Pedra')}>Pedra</button>
-                <button onClick={() => jogar('Papel')}>Papel</button>
-                <button onClick={() => jogar('Tesoura')}>Tesoura</button>
+        <div className="flex flex-col items-center justify-center h-screen">
+            <h1 className="text-4xl font-bold mb-8">Jogo de Pedra, Papel e Tesoura</h1>
+
+            <div className="flex justify-center">
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded m-2" onClick={() => jogar('pedra')}>Pedra</button>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded m-2" onClick={() => jogar('papel')}>Papel</button>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded m-2" onClick={() => jogar('tesoura')}>Tesoura</button>
             </div>
-            {jogador && computador && (<Resultado jogador={jogador} computador={computador} empate={empate} />)}
-            <JogarNovamente jogarNovamente={reiniciarJogo} />
-        </section>
+
+            {jogador && (
+                <div className="mt-8">
+                    <p className="text-lg">Você escolheu: {jogador}</p>
+                    <p className="text-lg">Computador escolheu: {computador}</p>
+                    <p className="text-xl font-semibold mt-4">Resultado: {resultado}</p>
+                </div>
+            )}
+        </div>
     );
 }
